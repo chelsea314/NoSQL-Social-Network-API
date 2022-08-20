@@ -83,8 +83,9 @@ module.exports = {
                 )
                 .catch((err) => res.status(500).json(err));
     },
-    // Remove friend from a user
+    // Remove reactions from a thought
     deleteReaction(req, res) {
+        console.log('You are deleting a reaction');
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId},
             { $pull: {reactions: { reactionId: req.params.reactionId}}},
@@ -95,7 +96,7 @@ module.exports = {
           ? res
               .status(404)
               .json({ message: 'No thought found with that ID :(' })
-          : res.json(thought)
+          : res.json('reaction deleted')
       )
       .catch((err) => res.status(500).json(err));
     },
